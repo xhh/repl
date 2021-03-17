@@ -15,7 +15,7 @@ defmodule Repl.MixProject do
   def application do
     [
       applications: [:httpoison],
-      extra_applications: [:logger]
+      extra_applications: [:logger, :clipboard]
     ]
   end
 
@@ -26,7 +26,7 @@ defmodule Repl.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:httpoison, "~> 1.6"},
       {:jason, "~> 1.2"},
-      {:clipboard, ">= 0.0.0", only: [:dev]}
+      {:clipboard, ">= 0.0.0"}
     ]
   end
 end
