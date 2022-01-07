@@ -1,13 +1,21 @@
+# ~/.iex.exs
+
+import_if_available Ecto.Query
+import_if_available Ecto.Changeset
+
 defmodule R do
   @moduledoc """
-  Documentation for `R`.
+  `R` for REPL.
   """
 
   def hex(n, copy_to_clipboard \\ true) do
     result = Integer.to_string(n, 16)
     if copy_to_clipboard do
-      IO.puts("#{n} == 0x#{result} (copied to clipboard: #{result})")
-      Clipboard.copy(result)
+      IO.puts("#{n} == 0x#{result}")
+      if function_exported?(Clipboard, :copy, 1) do
+        Clipboard.copy(result)
+        IO.puts("copied to clipboard: #{result}")
+      end
     else
       IO.puts("#{n} == 0x#{result}")
     end
@@ -16,9 +24,7 @@ defmodule R do
 
   @doc """
   # Examples
-
   random_string(15, special: true)
-
   """
   def random_string(len \\ 12, opts \\ []) do
     alphabet = Keyword.get(opts, :alphabet, true)
